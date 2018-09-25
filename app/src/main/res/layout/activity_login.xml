@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".LoginActivity"
+    android:orientation="vertical"
+    android:padding="30dp">
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/textLogin"
+        android:textSize="34dp"
+        android:textColor="#19769F"
+        android:fontFamily="Gotham Rounded"
+        android:layout_marginTop="70dp"
+        android:layout_marginBottom="10dp"/>
+
+    <EditText
+        android:id="@+id/edtUsername"
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:background="@drawable/customer_button2"
+        android:hint="Username"
+        style="@style/TextHintInButton"/>
+
+    <EditText
+        android:id="@+id/edtPassword"
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:background="@drawable/customer_button2"
+        android:hint="Password"
+        style="@style/TextHintInButton"
+        android:layout_marginTop="20dp"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="20dp">
+        <CheckBox
+            android:id="@+id/chbLogin"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/remember_login"
+            android:textColor="#95989A"
+            android:fontFamily="Gotham Rounded"/>
+
+    </LinearLayout>
+    <Button
+        android:id="@+id/btnLogin"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/customer_button"
+        android:layout_marginTop="20dp"
+        android:text="Login"
+        style="@style/PrimaryButton"
+        android:textStyle="bold"
+        android:textSize="18sp"/>
+
+</LinearLayout>

@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".AddUserActivity">
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbarAddUser"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="@color/colorPrimary"
+        android:elevation="4dp"
+        android:theme="@style/AppTheme.AppBarOverlay"
+        app:popupTheme="@style/AppTheme.PopupOverlay">
+
+    </android.support.v7.widget.Toolbar>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:padding="16dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:layout_marginTop="20dp"
+            android:fontFamily="Gotham Rounded"
+            android:text="@string/action_add_user"
+            android:textColor="#19769F"
+            android:textSize="34dp" />
+
+        <EditText
+            android:id="@+id/edtUsername"
+            style="@style/TextHintInButton"
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:background="@drawable/customer_button2"
+            android:hint="Username"
+            android:inputType="textPassword"
+            android:imeOptions="actionNext"/>
+
+        <EditText
+            android:id="@+id/edtPassword"
+            style="@style/TextHintInButton"
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:layout_marginTop="20dp"
+            android:background="@drawable/customer_button2"
+            android:hint="Password"
+            android:inputType="text"
+            android:imeOptions="actionNext"/>
+
+        <EditText
+            android:id="@+id/edtConfirmPass"
+            style="@style/TextHintInButton"
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:layout_marginTop="20dp"
+            android:background="@drawable/customer_button2"
+            android:hint="Confirm Password"
+            android:inputType="textPassword"
+            android:imeOptions="actionNext"/>
+
+        <EditText
+            android:id="@+id/edtMobileNumber"
+            style="@style/TextHintInButton"
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:layout_marginTop="20dp"
+            android:background="@drawable/customer_button2"
+            android:hint="Mobile number"
+            android:inputType="number"
+            android:imeOptions="actionNext"/>
+
+        <EditText
+            android:id="@+id/edtFullName"
+            style="@style/TextHintInButton"
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:layout_marginTop="20dp"
+            android:background="@drawable/customer_button2"
+            android:hint="Full name"
+            android:inputType="text"
+            android:imeOptions="actionDone"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:weightSum="2">
+
+            <Button
+                android:id="@+id/btnAddUser"
+                style="@style/PrimaryButton"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="10dp"
+                android:layout_marginTop="20dp"
+                android:layout_weight="1"
+                android:background="@drawable/customer_button"
+                android:onClick="addUser"
+                android:text="Add user"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+
+            <Button
+                android:id="@+id/btnCancel"
+                style="@style/PrimaryButton"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="20dp"
+                android:layout_weight="1"
+                android:background="@drawable/customer_button"
+                android:text="Cancel"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/btnViewUserList"
+            style="@style/PrimaryButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:onClick="viewTheUserList"
+            android:background="@drawable/customer_button"
+            android:text="View the user list"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+    </LinearLayout>
+
+
+</LinearLayout>

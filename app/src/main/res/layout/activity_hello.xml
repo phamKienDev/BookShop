@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/background_color"
+    tools:context=".HelloActivity"
+    android:orientation="vertical"
+    android:padding="16dp">
+
+    <FrameLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="80dp">
+        <ImageView
+            android:layout_width="148dp"
+            android:layout_height="148dp"
+            android:src="@drawable/customer_shape1"/>
+        <ImageView
+            android:layout_width="128dp"
+            android:layout_height="128dp"
+            android:background="@drawable/customer_shape"
+            android:layout_gravity="center"/>
+
+        <ImageView
+            android:layout_width="128dp"
+            android:layout_height="128dp"
+            android:src="@drawable/logo_book"
+            android:layout_gravity="center"/>
+    </FrameLayout>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/nameApp"
+        android:layout_gravity="center_horizontal"
+        android:textSize="24dp"
+        android:textColor="@color/nameApp"
+        android:layout_marginTop="10dp"
+        android:fontFamily="Gotham Rounded"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/nameDes"
+        android:textSize="20dp"
+        android:textColor="#707070"
+        android:fontFamily="Segoe UI"
+        android:gravity="center_horizontal"
+        android:layout_marginTop="20dp"/>
+    <Button
+        android:id="@+id/btnGettingStarted"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/customer_button"
+        style="@style/PrimaryButton"
+        android:text="@string/btnStart"
+        android:layout_marginTop="140dp"/>
+
+
+</LinearLayout>
