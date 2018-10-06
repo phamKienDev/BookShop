@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    app:cardCornerRadius="10dp"
+    app:cardMaxElevation="8dp"
+    android:layout_margin="4dp">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="5dp"
+        android:gravity="center_vertical">
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/tvItemDetailBookID"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="Gotham Rounded"
+                android:text="Bill 01"
+                android:textColor="#19769F"
+                android:textSize="15sp" />
+
+
+            <TextView
+                android:id="@+id/tvItemDetailQuantity"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="Gotham Rounded"
+                android:text="Address "
+                android:textColor="#95989A"
+                android:textSize="12sp" />
+            <TextView
+                android:id="@+id/tvItemDetailPrice"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="Gotham Rounded"
+                android:text="Address "
+                android:textColor="#95989A"
+                android:textSize="12sp" />
+            <TextView
+                android:id="@+id/tvItemDetailPay"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="Gotham Rounded"
+                android:text="Address "
+                android:textColor="#95989A"
+                android:textSize="12sp" />
+        </LinearLayout>
+
+
+
+        <ImageView
+            android:id="@+id/imgItemDetailDelete"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:src="@drawable/ic_delete_custom"
+            android:layout_marginLeft="5dp"/>
+    </LinearLayout>
+
+</android.support.v7.widget.CardView>
