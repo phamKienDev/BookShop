@@ -61,6 +61,27 @@ public class HomeActivity extends AppCompatActivity
                 startActivity(intent);
             }
         });
+        imgBill.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent=new Intent(HomeActivity.this,BillActivity.class);
+                startActivity(intent);
+            }
+        });
+        imgStatistical.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent=new Intent(HomeActivity.this,StatisticalActivity.class);
+                startActivity(intent);
+            }
+        });
+        imgBestSeller.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent=new Intent(HomeActivity.this,BestSellerActivity.class);
+                startActivity(intent);
+            }
+        });
     }
 
     @Override
@@ -82,8 +103,9 @@ public class HomeActivity extends AppCompatActivity
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
-        if (id == R.id.nav_user) {
-            // Handle the camera action
+        if (id == R.id.nav_add_user) {
+            Intent intent=new Intent(HomeActivity.this,AddUserActivity.class);
+            startActivity(intent);
         } else if (id == R.id.nav_typebook) {
 
         } else if (id == R.id.nav_book) {

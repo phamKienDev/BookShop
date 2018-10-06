@@ -22,6 +22,7 @@ public class LoginActivity extends AppCompatActivity {
     private SharedPreferences sharedPreferences;
     private UserDAO userDAO;
     private DatabaseManager databaseManager;
+    public static String USERNAME_ONLINE="";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,12 +46,13 @@ public class LoginActivity extends AppCompatActivity {
         btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String username = edtUsername.getText().toString().trim();
+
+                USERNAME_ONLINE = edtUsername.getText().toString().trim(); //lay username cho delete list user-> k dc phep xoa ng dung dang online
                 String password = edtPassword.getText().toString().trim();
                 //tạo đối tượng lưu thay đổi
                 SharedPreferences.Editor editor = sharedPreferences.edit();
 
-                if (username.equals("")) {
+                if (USERNAME_ONLINE.equals("")) {
                     edtUsername.setError(getString(R.string.notify_empty_username));
                     return;
                 } else if (password.equals("")) {
@@ -61,20 +63,22 @@ public class LoginActivity extends AppCompatActivity {
                     return;
                 } else {
 
-                       User userCheck=userDAO.getUserByUsername(username);
+                       User userCheck=userDAO.getUserByUsername(USERNAME_ONLINE);
                        if(userCheck ==null){
                            Toast.makeText(LoginActivity.this, R.string.notify_username_password_in_login, Toast.LENGTH_SHORT).show();
                        }else{
+
                            //lấy password từ DB của User
                            String passInDB=userCheck.getPassWord();
 
                            //so sanh pass nhap dung hay k
                            if(passInDB.equals(password)){
+
                                //dang nhap thành công
                                //luu username, password neu checkbox luu mat khau
                                if(chbLogin.isChecked()){
                                    // click vào checkbox
-                                   editor.putString("username",username);
+                                   editor.putString("username",USERNAME_ONLINE);
                                    editor.putString("password",password);
                                    editor.putBoolean("check",true);
                                }else{
@@ -82,6 +86,7 @@ public class LoginActivity extends AppCompatActivity {
                                    editor.clear();
                                }
                                editor.commit();
+
 
                                //chuyen man hinh
                                Intent intent = new Intent(LoginActivity.this, HomeActivity.class);

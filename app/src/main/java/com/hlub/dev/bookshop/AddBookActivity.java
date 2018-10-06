@@ -16,6 +16,7 @@ import android.widget.Toast;
 
 import com.hlub.dev.bookshop.dao.BookDAO;
 import com.hlub.dev.bookshop.dao.TypeBookDAO;
+import com.hlub.dev.bookshop.database.DatabaseManager;
 import com.hlub.dev.bookshop.model.Book;
 import com.hlub.dev.bookshop.model.TypeBook;
 
@@ -35,6 +36,7 @@ public class AddBookActivity extends AppCompatActivity implements AdapterView.On
     private Button btnViewBookList;
 
     private BookDAO bookDAO;
+    private DatabaseManager manager;
     
 
     private TypeBookDAO typeBookDAO;
@@ -47,7 +49,8 @@ public class AddBookActivity extends AppCompatActivity implements AdapterView.On
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_book);
-        bookDAO = new BookDAO(this);
+        manager=new DatabaseManager(this);
+        bookDAO = new BookDAO(manager);
         typeBookDAO = new TypeBookDAO(this);
         typeBookList = new ArrayList<>();
 
@@ -97,7 +100,7 @@ public class AddBookActivity extends AppCompatActivity implements AdapterView.On
         typeItem = adapterView.getItemAtPosition(i).toString();
 
         //show select
-        Toast.makeText(this, "Selected: " + typeItem, Toast.LENGTH_SHORT).show();
+        //Toast.makeText(this, "Selected: " + typeItem, Toast.LENGTH_SHORT).show();
     }
 
     @Override
@@ -140,4 +143,5 @@ public class AddBookActivity extends AppCompatActivity implements AdapterView.On
         Intent intent=new Intent(AddBookActivity.this,BookActivity.class);
         startActivity(intent);
     }
+
 }

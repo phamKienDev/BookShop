@@ -81,7 +81,7 @@ public class AddUserActivity extends AppCompatActivity {
                 userDAO.insertUser(user);
                 Toast.makeText(this, "Add account successfully", Toast.LENGTH_SHORT).show();
             }else{
-                Toast.makeText(this, "Duplicate account, please try again", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "", Toast.LENGTH_SHORT).show();
             }
             
         }

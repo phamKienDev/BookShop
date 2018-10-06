@@ -47,10 +47,10 @@ public class UserActivity extends AppCompatActivity {
         inits();
 
         //them
-        userDAO.insertUser(new User("admin1","admin1","01223455","kien"));
-        userDAO.insertUser(new User("admin2","admin1","01223455","kien"));
-        userDAO.insertUser(new User("admin3","admin1","01223455","kien"));
-        userDAO.insertUser(new User("admin4","admin123","01223455","kien"));
+        //userDAO.insertUser(new User("admin1","admin1","01223455","kien"));
+        //userDAO.insertUser(new User("admin2","admin1","01223455","kien"));
+        //userDAO.insertUser(new User("admin3","admin1","01223455","kien"));
+        //userDAO.insertUser(new User("admin4","admin123","01223455","kien"));
         //get listUser
         getUserList();
         //Log.e("Size", "number" + userList.get(0).getPassWord());
@@ -147,10 +147,21 @@ public class UserActivity extends AppCompatActivity {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
                 //xoa user
-                deleteUser(positon);
+                if (userList.size()<=1){
+                    //neu list user chi con 1 nguoi se k dc xoa
+                    Toast.makeText(UserActivity.this, R.string.do_not_delete_the_last_user, Toast.LENGTH_SHORT).show();
+
+                }else if(userList.get(positon).getUserName().equals(LoginActivity.USERNAME_ONLINE)){
+                    //nếu ng dùng đang online
+                    //-> k đc xóa
+                    Toast.makeText(UserActivity.this, R.string.do_not_delete_users_online, Toast.LENGTH_SHORT).show();
+
+                }else {
+                    deleteUser(positon);
+                }
 
 
-                Toast.makeText(UserActivity.this, "Delete user successfully", Toast.LENGTH_SHORT).show();
+
             }
         });
 
@@ -178,6 +189,10 @@ public class UserActivity extends AppCompatActivity {
         builder.setView(view);
         edtUpdateFullname = view.findViewById(R.id.edtUpdateHotenUser);
         edtUpdateMobile = view.findViewById(R.id.edtUpdateMobileUser);
+
+        //set text
+        edtUpdateFullname.setText(userList.get(position).getHoTen());
+        edtUpdateMobile.setText(userList.get(position).getPhone());
 
         builder.setPositiveButton("Update", new DialogInterface.OnClickListener() {
             @Override

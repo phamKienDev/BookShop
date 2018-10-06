@@ -39,7 +39,9 @@
             android:layout_width="match_parent"
             android:layout_height="45dp"
             android:background="@drawable/customer_button2"
-            android:hint="ID Type book" />
+            android:hint="ID Type book"
+            android:inputType="text"
+            android:imeOptions="actionNext"/>
 
         <EditText
             android:id="@+id/edtNameTypebook"
@@ -48,7 +50,9 @@
             android:layout_height="45dp"
             android:layout_marginTop="20dp"
             android:background="@drawable/customer_button2"
-            android:hint="Name Type book" />
+            android:hint="Name Type book"
+            android:inputType="text"
+            android:imeOptions="actionNext"/>
         <EditText
             android:id="@+id/edtDescription"
             style="@style/TextHintInButton"
@@ -56,7 +60,9 @@
             android:layout_height="45dp"
             android:layout_marginTop="20dp"
             android:background="@drawable/customer_button2"
-            android:hint="Description" />
+            android:hint="Description"
+            android:inputType="text"
+            android:imeOptions="actionNext"/>
 
         <EditText
             android:id="@+id/edtPosition"
@@ -65,7 +71,9 @@
             android:layout_height="45dp"
             android:layout_marginTop="20dp"
             android:background="@drawable/customer_button2"
-            android:hint="Position" />
+            android:hint="Position"
+            android:inputType="number"
+            android:imeOptions="actionDone"/>
 
 
 

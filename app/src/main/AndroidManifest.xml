@@ -55,10 +55,40 @@
             android:label="@string/title_activity_book_activity"
             android:parentActivityName=".BookActivity"
             android:theme="@style/AppThemeNoActionBar" />
-        <activity android:name=".ChangePasswordActivity"
-            android:parentActivityName=".UserActivity"
+        <activity
+            android:name=".ChangePasswordActivity"
             android:label="@string/title_activity_user_activity"
-            android:theme="@style/AppThemeNoActionBar"/>
+            android:parentActivityName=".UserActivity"
+            android:theme="@style/AppThemeNoActionBar" />
+        <activity
+            android:name=".BillActivity"
+            android:label="@string/title_activity_bill_activity"
+            android:parentActivityName=".HomeActivity"
+            android:theme="@style/AppThemeNoActionBar" />
+        <activity
+            android:name=".AddBillActivity"
+            android:label="@string/title_activity_bill_activity"
+            android:parentActivityName=".BillActivity"
+            android:theme="@style/AppThemeNoActionBar" />
+        <activity
+            android:name=".BillDetailActivity"
+            android:label="@string/title_activity_bill_detail_activity"
+            android:parentActivityName=".BillActivity"
+            android:theme="@style/AppThemeNoActionBar" />
+        <activity
+            android:name=".AddBillDetailActivity"
+            android:label="@string/title_activity_bill_detail_activity"
+            android:parentActivityName=".BillActivity"
+            android:theme="@style/AppThemeNoActionBar" />
+        <activity android:name=".AboutActivity" />
+        <activity android:name=".StatisticalActivity"
+            android:label="@string/action_statistical"
+            android:theme="@style/AppThemeNoActionBar"
+            android:parentActivityName=".HomeActivity"/>
+        <activity android:name=".BestSellerActivity"
+            android:label="@string/action_add_typebook"
+            android:theme="@style/AppThemeNoActionBar"
+            android:parentActivityName=".HomeActivity"></activity>
     </application>
 
 </manifest>

@@ -22,7 +22,9 @@
         android:layout_height="45dp"
         android:background="@drawable/customer_button2"
         android:hint="Username"
-        style="@style/TextHintInButton"/>
+        style="@style/TextHintInButton"
+        android:inputType="text"
+        android:imeOptions="actionNext"/>
 
     <EditText
         android:id="@+id/edtPassword"
@@ -31,7 +33,9 @@
         android:background="@drawable/customer_button2"
         android:hint="Password"
         style="@style/TextHintInButton"
-        android:layout_marginTop="20dp"/>
+        android:layout_marginTop="20dp"
+        android:inputType="textPassword"
+        android:imeOptions="actionDone"/>
 
     <LinearLayout
         android:layout_width="match_parent"

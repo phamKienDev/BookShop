@@ -14,6 +14,7 @@ import android.widget.Toast;
 
 import com.hlub.dev.bookshop.adapter.BookApdater;
 import com.hlub.dev.bookshop.dao.BookDAO;
+import com.hlub.dev.bookshop.database.DatabaseManager;
 import com.hlub.dev.bookshop.model.Book;
 
 import java.util.ArrayList;
@@ -25,16 +26,20 @@ public class BookActivity extends AppCompatActivity {
     private RecyclerView recyclerViewBook;
     private List<Book> bookList;
     private BookApdater bookApdater;
+    private DatabaseManager manager;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_book);
-        bookDAO=new BookDAO(this);
-        bookList=new ArrayList<>();
+        manager=new DatabaseManager(this);
+        bookDAO = new BookDAO(manager);
+        bookList = new ArrayList<>();
 
-        bookDAO.insertBook(new Book("sa2","01","kien","kima",70000,10));
-        bookDAO.insertBook(new Book("sa3","02","kien","kima",70000,10));
-        bookDAO.insertBook(new Book("sa4","03","kien","kima",70000,10));
+        // bookDAO.insertBook(new Book("sa2","01","kien","kima",70000,10));
+        //bookDAO.insertBook(new Book("sa3","02","kien","kima",70000,10));
+        // bookDAO.insertBook(new Book("sa4","03","kien","kima",70000,10));
+        //bookDAO.insertBook(new Book("sa4","03","kien","kima",70000,15));
 
         //anh xa
         inits();
@@ -48,13 +53,14 @@ public class BookActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
 
+
     }
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_book, menu);
         return super.onCreateOptionsMenu(menu);
     }
-
 
 
     //onlick menu
@@ -70,54 +76,21 @@ public class BookActivity extends AppCompatActivity {
 
     public void inits() {
         toolbarBook = findViewById(R.id.toolbarBook);
-        recyclerViewBook=findViewById(R.id.recycleviewBook);
+        recyclerViewBook = findViewById(R.id.recycleviewBook);
     }
 
     //get list  all book
-    public void getListBook(){
-        bookList.addAll(bookDAO.getAllListBook());
-        bookApdater=new BookApdater(this,bookList);
-        RecyclerView.LayoutManager manager=new LinearLayoutManager(this);
+    public void getListBook() {
+        bookList=(bookDAO.getAllListBook());
+        bookApdater = new BookApdater(this, bookList);
+        RecyclerView.LayoutManager manager = new LinearLayoutManager(this);
         recyclerViewBook.setLayoutManager(manager);
         recyclerViewBook.setAdapter(bookApdater);
-    }
-
-    /**
-     * Delete
-     */
-    public void deleteBook(int position){
-        Book book=bookList.get(position);
-
-        //delete in DB
-        bookDAO.deleteBook(book);
-
-        //delete in List
-        bookList.remove(position);
-        bookApdater.notifyItemRemoved(position);
+        bookApdater.notifyDataSetChanged();
     }
 
 
-    /**
-     * show Dialog delete
-     */
 
-    public void showDialogDeleteBook(final int position){
-        AlertDialog.Builder builder=new AlertDialog.Builder(this);
 
-        builder.setTitle("Delete book");
-        builder.setPositiveButton("Delete", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialogInterface, int i) {
-                deleteBook(position);
-                Toast.makeText(BookActivity.this, "Delete book successfully", Toast.LENGTH_SHORT).show();
-            }
-        });
-        builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialogInterface, int i) {
-                dialogInterface.dismiss();
-            }
-        });
-        builder.show();
-    }
+
 }

@@ -2,22 +2,7 @@ package com.hlub.dev.bookshop.model;
 
 public class User {
 
-    //ten bang
-    public static final String TABLE_USER = "User";
 
-    //ten cot
-    public static final String COLUMN_USERNAME = "userName";
-    public static final String COLUMN_PASSWORD = "Password";
-    public static final String COLUMN_PHONE = "Phone";
-    public static final String COLUMN_HOTEN = "hoTen";
-
-    //cau lenh tao bang
-    public static final String CREATE_TABLE_USER = " CREATE TABLE " + TABLE_USER + " ( " +
-            COLUMN_USERNAME + " TEXT PRIMARY KEY, " +
-            COLUMN_PASSWORD + " TEXT," +
-            COLUMN_PHONE + " TEXT," +
-            COLUMN_HOTEN + " TEXT " +
-            " ) ";
 
     private String userName;
     private String passWord;

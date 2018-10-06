@@ -42,8 +42,8 @@ public class TypeBookActivity extends AppCompatActivity {
 
         //them typebook
         //typeBookDAO.inserTypeBook(new TypeBook("01","lich su","abc",1));
-        typeBookDAO.inserTypeBook(new TypeBook("02","lich su","abc",1));
-        typeBookDAO.inserTypeBook(new TypeBook("03","lich su","abc",1));
+       // typeBookDAO.inserTypeBook(new TypeBook("02","lich su","abc",1));
+        //typeBookDAO.inserTypeBook(new TypeBook("03","lich su","abc",1));
 
         //anh xa
         inits();
@@ -154,6 +154,11 @@ public class TypeBookActivity extends AppCompatActivity {
         edtUpdateTypebookName = view.findViewById(R.id.edtUpdateNameTypeBook);
         edtUpdateTypebookDes = view.findViewById(R.id.edtUpdatetDesTypebook);
         edtUpdateTypebookPosition = view.findViewById(R.id.edtUpdatetPositionTypebook);
+
+        //setText
+        edtUpdateTypebookName.setText(typeBookList.get(position).getTypeBookName());
+        edtUpdateTypebookDes.setText(typeBookList.get(position).getTypeBookDes());
+        edtUpdateTypebookPosition.setText(String.valueOf(typeBookList.get(position).getTypeBookPosition()));
 
 
         builder.setPositiveButton("Update", new DialogInterface.OnClickListener() {
