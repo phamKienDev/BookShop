@@ -14,8 +14,10 @@ import android.widget.Toast;
 
 import com.hlub.dev.bookshop.BookActivity;
 import com.hlub.dev.bookshop.R;
+import com.hlub.dev.bookshop.dao.BillDetailDAO;
 import com.hlub.dev.bookshop.dao.BookDAO;
 import com.hlub.dev.bookshop.database.DatabaseManager;
+import com.hlub.dev.bookshop.model.BillDetail;
 import com.hlub.dev.bookshop.model.Book;
 
 import java.util.List;
@@ -25,6 +27,7 @@ public class BookApdater extends RecyclerView.Adapter<BookApdater.BookHoler> {
     private Context context;
     private List<Book> bookList;
     private BookDAO bookDAO;
+    private BillDetailDAO billDetailDAO;
     private DatabaseManager manager;
 
     public BookApdater(Context context, List<Book> bookList) {
@@ -32,6 +35,7 @@ public class BookApdater extends RecyclerView.Adapter<BookApdater.BookHoler> {
         this.bookList = bookList;
         manager=new DatabaseManager(context);
         bookDAO=new BookDAO(manager);
+        billDetailDAO=new BillDetailDAO(manager);
     }
 
     @NonNull
@@ -61,12 +65,27 @@ public class BookApdater extends RecyclerView.Adapter<BookApdater.BookHoler> {
     public void deleteBook(int position) {
         Book book = bookList.get(position);
 
-        //delete in DB
-        bookDAO.deleteBook(book);
+        //phai xoa book trong billDetail trước -> kiểm tra xem trong billDetail có book đó k
+        boolean xoa=false;
+        for(BillDetail billDetail:billDetailDAO.getAllBillDetail()){
+            if(billDetail.getBook().getBookID().equals(book.getBookID())){
+               xoa=false;
+            }else{
+                xoa=true;
+            }
+        }
+        if(xoa==false){
+            Toast.makeText(context, R.string.notify_delete_book_in_billdetail, Toast.LENGTH_SHORT).show();
+        }else{
+            //delete in DB
+            bookDAO.deleteBook(book);
+            //delete in List
+            bookList.remove(position);
+            notifyItemRemoved(position);
+        }
 
-        //delete in List
-        bookList.remove(position);
-        notifyItemRemoved(position);
+
+
     }
 
     /**

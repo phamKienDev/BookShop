@@ -181,7 +181,7 @@ public class UserActivity extends AppCompatActivity {
 
         //thiet lap
         builder.setTitle("Update user");
-        builder.setMessage("Would you like to update?");
+        //builder.setMessage("Would you like to update?");
 
         //tao view
         LayoutInflater inflater = getLayoutInflater();
@@ -215,7 +215,7 @@ public class UserActivity extends AppCompatActivity {
         builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
-                dialogInterface.dismiss();
+               // dialogInterface.dismiss();
             }
         });
 

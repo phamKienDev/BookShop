@@ -9,6 +9,8 @@ public class Book {
     private String nxb;
     private float bookPrice;
     private int bookQuantity;
+    public String name;
+
 
     public Book() {
     }

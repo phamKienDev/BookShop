@@ -18,17 +18,19 @@ import com.hlub.dev.bookshop.R;
 import com.hlub.dev.bookshop.model.Bill;
 
 import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 public class BillAdapter extends RecyclerView.Adapter<BillAdapter.BillHolder> {
 
     private List<Bill> billList;
     private BillActivity billActivity;
-    private SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
+    private SimpleDateFormat sdf;
 
     public BillAdapter(List<Bill> billList, BillActivity billActivity) {
         this.billList = billList;
         this.billActivity = billActivity;
+        sdf = new SimpleDateFormat("dd-M-yyyy hh:mm:ss");
     }
 
     @NonNull
@@ -42,7 +44,8 @@ public class BillAdapter extends RecyclerView.Adapter<BillAdapter.BillHolder> {
     public void onBindViewHolder(@NonNull BillHolder holder, final int position) {
         final Bill bill = billList.get(position);
         holder.tvItemBillID.setText(bill.getBillId());
-        holder.tvItemBillDate.setText(sdf.format(bill.getDate()));
+        //chuyển String ->date
+        holder.tvItemBillDate.setText(sdf.format(bill.getDate()).toString());
         holder.layoutClickBillDetail.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -66,7 +69,6 @@ public class BillAdapter extends RecyclerView.Adapter<BillAdapter.BillHolder> {
         ImageView imgItemBill;
         TextView tvItemBillID;
         TextView tvItemBillDate;
-        ImageView imgItemBillUpdate;
         ImageView imgItemBillDelete;
         LinearLayout layoutClickBillDetail;
 
@@ -75,9 +77,8 @@ public class BillAdapter extends RecyclerView.Adapter<BillAdapter.BillHolder> {
             imgItemBill = itemView.findViewById(R.id.imgItemBill);
             tvItemBillID = itemView.findViewById(R.id.tvItemBillID);
             tvItemBillDate = itemView.findViewById(R.id.tvItemBillDate);
-            imgItemBillUpdate = itemView.findViewById(R.id.imgItemBillUpdate);
             imgItemBillDelete = itemView.findViewById(R.id.imgItemBillDelete);
-            layoutClickBillDetail=itemView.findViewById(R.id.layoutClickBillDetail);
+            layoutClickBillDetail = itemView.findViewById(R.id.layoutClickBillDetail);
         }
     }
 

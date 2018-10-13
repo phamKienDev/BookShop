@@ -18,6 +18,7 @@ import com.hlub.dev.bookshop.model.Bill;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
 
 public class AddBillActivity extends AppCompatActivity {
     private Toolbar toolbarAddBill;
@@ -28,18 +29,19 @@ public class AddBillActivity extends AppCompatActivity {
     private SimpleDateFormat simpleDateFormat;
     private DatabaseManager manager;
     private BillDAO billDAO;
+    private long dateBuy;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_bill);
-        simpleDateFormat = new SimpleDateFormat("dd-MM-yyyy");
         manager = new DatabaseManager(this);
         billDAO = new BillDAO(manager);
 
 
         //anh xa
         anhxa();
+        simpleDateFormat = new SimpleDateFormat("dd/MM/yyyy");
 
         //toolbar
         setSupportActionBar(toolbarAddBill);
@@ -70,7 +72,8 @@ public class AddBillActivity extends AppCompatActivity {
             public void onDateSet(DatePicker datePicker, int i, int i1, int i2) {
                 //set thoi gian theo tuy chon nguoi dung
                 calendar.set(i, i1, i2);
-                edtDateBill.setText(simpleDateFormat.format(calendar.getTime()));
+                dateBuy = calendar.getTimeInMillis();
+                edtDateBill.setText(new Date(calendar.getTimeInMillis()).toString());
             }
         }, year, month, day);
         datePickerDialog.show();
@@ -78,13 +81,11 @@ public class AddBillActivity extends AppCompatActivity {
 
     public void addBill(View view) {
         String billID = edtIdBill.getText().toString();
-        String dateBuy = edtDateBill.getText().toString();
         try {
             //kiem tra rong
             if (billID.equals("")) {
                 edtIdBill.setError(getString(R.string.notify_empty_billID));
-            } else if (dateBuy.equals("")) {
-                edtIdBill.setError(getString(R.string.notify_empty_bill_date));
+
             } else {
                 Bill bill = billDAO.getBillByID(billID);
                 //kiem tra da ton tai hay chua
@@ -92,19 +93,19 @@ public class AddBillActivity extends AppCompatActivity {
 
                     //them bill vào DB
 
-                       Bill bill1 = new Bill(billID, simpleDateFormat.parse(dateBuy));
-                    if(billDAO.insertBill(bill1)>0){
-                       Toast.makeText(this, "Add bill successfully", Toast.LENGTH_SHORT).show();
+                    Bill bill1 = new Bill(billID, dateBuy);
+                    if (billDAO.insertBill(bill1) > 0) {
+                        Toast.makeText(this, "Add bill successfully", Toast.LENGTH_SHORT).show();
 
-                       //truyen billID cho HDCT ->chuyen man hinh
-                       Intent intent = new Intent(AddBillActivity.this, AddBillDetailActivity.class);
-                       Bundle bundle = new Bundle();
-                       bundle.putString("billID", billID);
-                       intent.putExtras(bundle);
-                       startActivity(intent);
-                   }else{
-                       Toast.makeText(this, "Add bill failed", Toast.LENGTH_SHORT).show();
-                   }
+                        //truyen billID cho HDCT ->chuyen man hinh
+                        Intent intent = new Intent(AddBillActivity.this, AddBillDetailActivity.class);
+                        Bundle bundle = new Bundle();
+                        bundle.putString("billID", billID);
+                        intent.putExtras(bundle);
+                        startActivity(intent);
+                    } else {
+                        Toast.makeText(this, "Add bill failed", Toast.LENGTH_SHORT).show();
+                    }
                 } else {
                     edtIdBill.setError(getString(R.string.notify_duplicate_bill));
                 }

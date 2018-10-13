@@ -8,7 +8,7 @@
     tools:context=".StatisticalActivity">
 
     <android.support.v7.widget.Toolbar
-        android:id="@+id/toolbarBill"
+        android:id="@+id/toolbarStatistical"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
         android:background="@color/colorPrimary"
@@ -19,7 +19,31 @@
     <com.github.mikephil.charting.charts.CombinedChart
         android:id="@+id/combinedChart"
         android:layout_width="match_parent"
-        android:layout_height="300dp"
+        android:layout_height="400dp"
         android:layout_marginTop="20dp" />
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="10dp">
+
+        <TextView
+            style="@style/TextHintInButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginRight="10dp"
+            android:text="Thống kê bán sách trong tháng"
+            android:textSize="18sp" />
+
+        <Spinner
+            android:id="@+id/spinnerMonth"
+            android:layout_width="match_parent"
+            android:layout_height="35dp"
+            style="@style/TextHintInButton"
+            android:background="@drawable/customer_button2" />
+    </LinearLayout>
 
 </LinearLayout>

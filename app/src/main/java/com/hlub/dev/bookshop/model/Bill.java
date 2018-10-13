@@ -4,9 +4,9 @@ import java.util.Date;
 
 public class Bill {
     private String billId;
-    private Date date;
+    private long date;
 
-    public Bill(String billId, Date date) {
+    public Bill(String billId, long date) {
         this.billId = billId;
         this.date = date;
     }
@@ -22,11 +22,11 @@ public class Bill {
         this.billId = billId;
     }
 
-    public Date getDate() {
+    public long getDate() {
         return date;
     }
 
-    public void setDate(Date date) {
+    public void setDate(long date) {
         this.date = date;
     }
 }

@@ -18,6 +18,7 @@ import android.widget.ImageView;
 public class HomeActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
     private ImageView imgUser, imgBill, imgBook, imgTypebook, imgBestSeller, imgStatistical;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -41,7 +42,7 @@ public class HomeActivity extends AppCompatActivity
         imgUser.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent=new Intent(HomeActivity.this,UserActivity.class);
+                Intent intent = new Intent(HomeActivity.this, UserActivity.class);
                 startActivity(intent);
             }
         });
@@ -49,7 +50,7 @@ public class HomeActivity extends AppCompatActivity
         imgTypebook.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent=new Intent(HomeActivity.this,TypeBookActivity.class);
+                Intent intent = new Intent(HomeActivity.this, TypeBookActivity.class);
                 startActivity(intent);
             }
         });
@@ -57,28 +58,28 @@ public class HomeActivity extends AppCompatActivity
         imgBook.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent=new Intent(HomeActivity.this,BookActivity.class);
+                Intent intent = new Intent(HomeActivity.this, BookActivity.class);
                 startActivity(intent);
             }
         });
         imgBill.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent=new Intent(HomeActivity.this,BillActivity.class);
+                Intent intent = new Intent(HomeActivity.this, BillActivity.class);
                 startActivity(intent);
             }
         });
         imgStatistical.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent=new Intent(HomeActivity.this,StatisticalActivity.class);
+                Intent intent = new Intent(HomeActivity.this, StatisticalActivity.class);
                 startActivity(intent);
             }
         });
         imgBestSeller.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent=new Intent(HomeActivity.this,BestSellerActivity.class);
+                Intent intent = new Intent(HomeActivity.this, BestSellerActivity.class);
                 startActivity(intent);
             }
         });
@@ -95,8 +96,6 @@ public class HomeActivity extends AppCompatActivity
     }
 
 
-
-
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
@@ -104,7 +103,7 @@ public class HomeActivity extends AppCompatActivity
         int id = item.getItemId();
 
         if (id == R.id.nav_add_user) {
-            Intent intent=new Intent(HomeActivity.this,AddUserActivity.class);
+            Intent intent = new Intent(HomeActivity.this, AddUserActivity.class);
             startActivity(intent);
         } else if (id == R.id.nav_typebook) {
 
@@ -120,12 +119,13 @@ public class HomeActivity extends AppCompatActivity
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
-    public void inits(){
-        imgUser=findViewById(R.id.imgUser);
-        imgTypebook=findViewById(R.id.imgTypebook);
-        imgBook=findViewById(R.id.imgBook);
-        imgBill=findViewById(R.id.imgBill);
-        imgStatistical=findViewById(R.id.imgStatistical);
-        imgBestSeller=findViewById(R.id.imgBestSeller);
+
+    public void inits() {
+        imgUser = findViewById(R.id.imgUser);
+        imgTypebook = findViewById(R.id.imgTypebook);
+        imgBook = findViewById(R.id.imgBook);
+        imgBill = findViewById(R.id.imgBill);
+        imgStatistical = findViewById(R.id.imgStatistical);
+        imgBestSeller = findViewById(R.id.imgBestSeller);
     }
 }

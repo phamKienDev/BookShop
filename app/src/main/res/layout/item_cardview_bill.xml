@@ -48,12 +48,6 @@
                 android:textSize="12sp" />
         </LinearLayout>
 
-        <ImageView
-            android:id="@+id/imgItemBillUpdate"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:src="@drawable/ic_edit_black_24dp"
-            />
 
         <ImageView
             android:id="@+id/imgItemBillDelete"

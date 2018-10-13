@@ -56,4 +56,5 @@
     <string name="notify_exist_book_id">BookID does not exist</string>
     <string name="notify_delete_billdetail_first">You must delete the bill detail first</string>
     <string name="notify_quantity_book_not_enough">Sorry, chúng tôi không đủ số lượng sách </string>
+    <string name="notify_delete_book_in_billdetail">You must delete the book in the detailed invoice first </string>
 </resources>

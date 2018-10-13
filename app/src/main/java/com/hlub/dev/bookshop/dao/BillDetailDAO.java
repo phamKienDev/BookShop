@@ -23,17 +23,20 @@ public class BillDetailDAO implements Constant {
     private DatabaseManager databaseManager;
     private SQLiteDatabase sqLiteDatabase;
     private BillDAO billDAO;
+    private BookDAO bookDAO;
 
     SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
 
     public BillDetailDAO(DatabaseManager databaseManager) {
         this.databaseManager = databaseManager;
         sqLiteDatabase = databaseManager.getWritableDatabase();
-        billDAO=new BillDAO(databaseManager);
+        billDAO = new BillDAO(databaseManager);
+        bookDAO = new BookDAO(databaseManager);
     }
 
     //insert
     public long insertBillDetail(BillDetail billDatail) {
+
         ContentValues values = new ContentValues();
         //values.put(COLUMN_BILL_DETAIL_ID, billDatail.getBillDetailId()); ->AUTOINCREMENT
         values.put(COLUMN_BOOK_ID, billDatail.getBook().getBookID());
@@ -44,6 +47,7 @@ public class BillDetailDAO implements Constant {
 
         Log.e("Insert billDetail", "inseet: " + id);
         return id;
+
 
     }
 
@@ -69,7 +73,7 @@ public class BillDetailDAO implements Constant {
                 do {
                     BillDetail billDetail = new BillDetail();
                     //bill=new Bill(billID, date)
-                    Bill bill = new Bill(cursor.getString(cursor.getColumnIndex(COLUMN_BILL_ID)), simpleDateFormat.parse(cursor.getString(cursor.getColumnIndex(COLUMN_BILL_DATE))));
+                    Bill bill = new Bill(cursor.getString(cursor.getColumnIndex(COLUMN_BILL_ID)), cursor.getLong(cursor.getColumnIndex(COLUMN_BILL_DATE)));
                     //book=new Book(bookID, bookType, tacgia, nxb,price, quantity)
                     Book book = new Book(cursor.getString(cursor.getColumnIndex(COLUMN_BOOK_ID)), cursor.getString(cursor.getColumnIndex(COLUMN_BOOK_TYPE)), cursor.getString(cursor.getColumnIndex(COLUMN_BOOK_AUTHOR)),
                             cursor.getString(cursor.getColumnIndex(COLUMN_BOOK_NXB)), cursor.getFloat(cursor.getColumnIndex(COLUMN_BOOK_PRICE)), cursor.getInt(cursor.getColumnIndex(COLUMN_BOOK_QUANTITY)));
@@ -114,7 +118,7 @@ public class BillDetailDAO implements Constant {
                 do {
                     BillDetail billDetail = new BillDetail();
                     //bill=new Bill(billID, date)
-                    Bill bill = new Bill(cursor.getString(cursor.getColumnIndex(COLUMN_BILL_ID)), simpleDateFormat.parse(cursor.getString(cursor.getColumnIndex(COLUMN_BILL_DATE))));
+                    Bill bill = new Bill(cursor.getString(cursor.getColumnIndex(COLUMN_BILL_ID)), cursor.getLong(cursor.getColumnIndex(COLUMN_BILL_DATE)));
                     //book=new Book(bookID, bookType, tacgia, nxb,price, quantity)
                     Book book = new Book(cursor.getString(cursor.getColumnIndex(COLUMN_BOOK_ID)), cursor.getString(cursor.getColumnIndex(COLUMN_BOOK_TYPE)), cursor.getString(cursor.getColumnIndex(COLUMN_BOOK_AUTHOR)),
                             cursor.getString(cursor.getColumnIndex(COLUMN_BOOK_NXB)), cursor.getFloat(cursor.getColumnIndex(COLUMN_BOOK_PRICE)), cursor.getInt(cursor.getColumnIndex(COLUMN_BOOK_QUANTITY)));
@@ -132,6 +136,27 @@ public class BillDetailDAO implements Constant {
                 Log.e("Error getAllBillDetail", "get: " + e);
             }
 
+        }
+        return billDetailList;
+    }
+
+    public List<BillDetail> getListBillDetailByBillId(String billId) {
+        List<BillDetail> billDetailList=new ArrayList<>();
+        Cursor cursor=sqLiteDatabase.query(TABLE_BILL_DETAIL,
+                new String[]{COLUMN_BILL_DETAIL_ID,COLUMN_BILL_ID,COLUMN_BOOK_ID,COLUMN_QUANTITY_BUY},
+                COLUMN_BILL_ID+"=?",
+                new String[]{billId},
+                null,null,null);
+        if(cursor.moveToFirst()){
+            do {
+                BillDetail billDetail=new BillDetail();
+                billDetail.setBillDetailId(cursor.getInt(cursor.getColumnIndex(COLUMN_BILL_DETAIL_ID)));
+                billDetail.setBill(billDAO.getBillByID(cursor.getString(1)));
+                billDetail.setBook(bookDAO.getBookById(cursor.getString(2)));
+                billDetail.setQuantityBuy(cursor.getInt(cursor.getColumnIndex(COLUMN_QUANTITY_BUY)));
+
+                billDetailList.add(billDetail);
+            }while (cursor.moveToNext());
         }
         return billDetailList;
     }
@@ -177,60 +202,6 @@ public class BillDetailDAO implements Constant {
             return false;
         }
 
-    }
-
-    //THỐNG KÊ
-    public double getPriceBillByDate() {
-        /**String sSQL ="SELECT SUM(tongtien) from (SELECT SUM(Sach.giaBia *
-         HoaDonChiTiet.soLuong) as 'tongtien' " +
-         "FROM HoaDon INNER JOIN HoaDonChiTiet on HoaDon.maHoaDon =
-         HoaDonChiTiet.maHoaDon " +
-         "INNER JOIN Sach on HoaDonChiTiet.maSach = Sach.maSach where
-         HoaDon.ngayMua = date('now') GROUP BY HoaDonChiTiet.maSach)tmp";**/
-
-        double doanhthu = 0;
-        String date="2018-10-04";
-        String sql = "SELECT SUM(tongtien) FROM( SELECT SUM(Book.giaBan*BillDeail.soLuongMua) AS'tongtien' " +
-                "FROM Bill INNER JOIN BillDeail ON Bill.maHoaDon=BillDeail.maHoaDon " +
-                "INNER JOIN Book ON BillDeail.maSach=Book.maSach " +
-                "WHERE Bill.ngaymua=(SELECT ngaymua FROM Bill WHERE ngaymua=date(date)))";
-        Cursor cursor = sqLiteDatabase.rawQuery(sql, null);
-        cursor.moveToFirst();
-        while (cursor.isAfterLast() == false) {
-            doanhthu = cursor.getDouble(0);
-            cursor.moveToNext();
-        }
-        cursor.close();
-        return doanhthu;
-    }
-    public double thongke(){
-        double doanhthu=0;
-        try {
-
-            //lay bill theo ngay mua
-            Date date=new Date();
-            //List<Bill> billList=billDAO.getListBillByDate(simpleDateFormat.parse("2018-10-04"));
-            List<Bill> billList=billDAO.getListBillByDate(date);
-
-            Log.e("List size","size: "+billList.size()+" '- - "+date);
-            //lay gia tri cac hoa don
-            for(Bill bill:billList){
-                Cursor cursor=sqLiteDatabase.query(TABLE_BILL_DETAIL,
-                        new String[]{COLUMN_BILL_DETAIL_ID,COLUMN_BILL_ID,COLUMN_BOOK_ID,COLUMN_QUANTITY_BUY},
-                        COLUMN_BILL_ID+"=?",
-                        new String[]{bill.getBillId()},
-                        null,null,null);
-                cursor.moveToFirst();
-                    while (cursor.isAfterLast()==false){
-                        doanhthu=cursor.getDouble(3);
-                        cursor.moveToNext();
-                    }
-                cursor.close();
-            }
-        }catch (Exception e){
-            Log.e("Get thong ke","thong ke"+e);
-        }
-       return doanhthu;
     }
 
 

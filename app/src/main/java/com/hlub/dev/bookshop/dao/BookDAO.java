@@ -4,23 +4,29 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.text.format.DateFormat;
 import android.util.Log;
 
 import com.hlub.dev.bookshop.constant.Constant;
 import com.hlub.dev.bookshop.database.DatabaseManager;
+import com.hlub.dev.bookshop.model.Bill;
 import com.hlub.dev.bookshop.model.Book;
 import com.hlub.dev.bookshop.model.User;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
-public class BookDAO implements Constant{
+public class BookDAO implements Constant {
     private DatabaseManager databaseManager;
 
     public BookDAO(DatabaseManager databaseManager) {
         this.databaseManager = databaseManager;
 
+
     }
+
 
     public long insertBook(Book book) {
         SQLiteDatabase sqLiteDatabase = databaseManager.getWritableDatabase();
@@ -59,7 +65,6 @@ public class BookDAO implements Constant{
                 books.add(book);
             } while (cursor.moveToNext());
         }
-        sqLiteDatabase.close();
         return books;
     }
 
@@ -87,7 +92,7 @@ public class BookDAO implements Constant{
             float book_price = cursor.getFloat(cursor.getColumnIndex(COLUMN_BOOK_PRICE));
             int book_quantity = cursor.getInt(cursor.getColumnIndex(COLUMN_BOOK_QUANTITY));
 
-            book=new Book();
+            book = new Book();
             book.setBookID(book_id);
             book.setTypeBookID(type_book_id);
             book.setAuthor(book_author);
@@ -99,40 +104,42 @@ public class BookDAO implements Constant{
 
         return book;
     }
-    public long updateQuantityBookWhenBuy(Book book){
-        SQLiteDatabase sqLiteDatabase=databaseManager.getWritableDatabase();
-        ContentValues values=new ContentValues();
-        values.put(COLUMN_BOOK_QUANTITY,book.getBookQuantity());
 
-        long id= sqLiteDatabase.update(TABLE_BOOK,
+    public long updateQuantityBookWhenBuy(Book book) {
+        SQLiteDatabase sqLiteDatabase = databaseManager.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put(COLUMN_BOOK_QUANTITY, book.getBookQuantity());
+
+        long id = sqLiteDatabase.update(TABLE_BOOK,
                 values,
-                COLUMN_BOOK_ID+ " =?",
+                COLUMN_BOOK_ID + " =?",
                 new String[]{book.getBookID()});
-        Log.e("Update buy","update buy"+id);
+        Log.e("Update buy", "update buy" + id);
         return id;
     }
 
-    public List<Book> getListBestSeller(String month){
-        List<Book> bookList=new ArrayList<>();
-        SQLiteDatabase sqLiteDatabase=databaseManager.getWritableDatabase();
+
+    public List<Book> getlistBookBestSeller(String month) {
+        List<Book> bookList = new ArrayList<>();
+        SQLiteDatabase sqLiteDatabase = databaseManager.getWritableDatabase();
         String sSQL = "SELECT maSach, SUM(soLuongMua) as soLuongMua FROM BillDeail INNER JOIN Bill " +
-        "ON Bill.maHoaDon = BillDeail.maHoaDon WHERE strftime('%m',Bill.ngaymua) = '"+month+"' " +
-        "GROUP BY maSach ORDER BY soLuongMua DESC LIMIT 10";
-        Cursor cursor=sqLiteDatabase.rawQuery(sSQL,null);
-        if(cursor.moveToNext()){
+                "ON Bill.maHoaDon = BillDeail.maHoaDon WHERE strftime('%m',Bill.ngaymua/1000,'unixepoch'"+
+        ") ='" + month + "'" +
+                "GROUP BY maSach ORDER BY soLuongMua DESC LIMIT 10";
+        Cursor cursor = sqLiteDatabase.rawQuery(sSQL, null);
+        Log.e("listBookBestSeller",sSQL);
+        if (cursor.moveToFirst()) {
             do {
-//                Book book=new Book();
-//                book.setBookID(cursor.getString(cursor.getColumnIndex(COLUMN_BOOK_ID)));
-//                book.setTypeBookID(cursor.getString(cursor.getColumnIndex(COLUMN_BOOK_TYPE)));
-//                book.setAuthor(cursor.getString(cursor.getColumnIndex(COLUMN_BOOK_AUTHOR)));
-//                book.setNxb(cursor.getString(cursor.getColumnIndex(COLUMN_BOOK_NXB)));
-//                book.setBookPrice(cursor.getFloat(cursor.getColumnIndex(COLUMN_BOOK_PRICE)));
-//                book.setBookQuantity(cursor.getInt(cursor.getColumnIndex(COLUMN_BOOK_QUANTITY)));
-                Book book=getBookById(cursor.getString(0));
+
+                Book book = getBookById(cursor.getString(0));
 
                 bookList.add(book);
-            }while (cursor.moveToNext());
+            } while (cursor.moveToNext());
         }
+
+
         return bookList;
     }
+
+
 }

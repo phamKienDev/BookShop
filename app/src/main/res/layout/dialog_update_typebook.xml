@@ -1,35 +1,52 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="16dp"
-    android:orientation="vertical">
-    <EditText
-        android:id="@+id/edtUpdateNameTypeBook"
+    android:orientation="vertical"
+    android:padding="16dp">
+
+    <android.support.design.widget.TextInputLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Update typebook name"
-        android:textSize="18sp"
-        android:layout_marginBottom="10dp"
-        android:inputType="text"
-        android:imeOptions="actionNext"/>
-    <EditText
-        android:id="@+id/edtUpdatetDesTypebook"
+        android:layout_height="wrap_content">
+
+        <EditText
+            android:id="@+id/edtUpdateNameTypeBook"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:hint="Typebook Name"
+            android:imeOptions="actionNext"
+            android:inputType="text"
+            android:textSize="18sp" />
+    </android.support.design.widget.TextInputLayout>
+
+    <android.support.design.widget.TextInputLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Update typebook description "
-        android:textSize="18sp"
-        android:layout_marginBottom="10dp"
-        android:inputType="text"
-        android:imeOptions="actionNext"/>
-    <EditText
-        android:id="@+id/edtUpdatetPositionTypebook"
+        android:layout_height="wrap_content">
+
+        <EditText
+            android:id="@+id/edtUpdatetDesTypebook"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:hint="Update typebook description "
+            android:imeOptions="actionNext"
+            android:inputType="text"
+            android:textSize="18sp" />
+    </android.support.design.widget.TextInputLayout>
+
+    <android.support.design.widget.TextInputLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Update position description "
-        android:textSize="18sp"
-        android:inputType="text"
-        android:imeOptions="actionDone"/>
+        android:layout_height="wrap_content">
+
+        <EditText
+            android:id="@+id/edtUpdatetPositionTypebook"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Update position description "
+            android:imeOptions="actionDone"
+            android:inputType="text"
+            android:textSize="18sp" />
+    </android.support.design.widget.TextInputLayout>
 
 </LinearLayout>

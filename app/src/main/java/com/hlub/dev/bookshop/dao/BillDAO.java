@@ -8,6 +8,8 @@ import android.util.Log;
 import com.hlub.dev.bookshop.constant.Constant;
 import com.hlub.dev.bookshop.database.DatabaseManager;
 import com.hlub.dev.bookshop.model.Bill;
+import com.hlub.dev.bookshop.model.BillDetail;
+import com.hlub.dev.bookshop.model.Book;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -16,10 +18,12 @@ import java.util.List;
 
 public class BillDAO implements Constant {
     private DatabaseManager databaseManager;
-    SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
+    static SQLiteDatabase sqLiteDatabase;
+
 
     public BillDAO(DatabaseManager databaseManager) {
         this.databaseManager = databaseManager;
+        sqLiteDatabase = databaseManager.getWritableDatabase();
     }
 
 
@@ -27,18 +31,20 @@ public class BillDAO implements Constant {
     public long insertBill(Bill bill) {
         SQLiteDatabase sqLiteDatabase = databaseManager.getWritableDatabase();
 
+
         ContentValues values = new ContentValues();
         values.put(COLUMN_BILL_ID, bill.getBillId());
-        values.put(COLUMN_BILL_DATE, simpleDateFormat.format(bill.getDate()));
+        values.put(COLUMN_BILL_DATE, bill.getDate());
 
         long id = sqLiteDatabase.insert(TABLE_BILL, null, values);
         Log.e("Insert Bill", "Bill: " + id);
         return id;
+
     }
 
     //getAllBill
     public List<Bill> getAllBill() {
-        SQLiteDatabase sqLiteDatabase = databaseManager.getWritableDatabase();
+
         List<Bill> billList = new ArrayList<>();
 
         try {
@@ -47,10 +53,9 @@ public class BillDAO implements Constant {
 
             if (cursor.moveToFirst()) {
                 do {
-
                     Bill bill = new Bill();
                     bill.setBillId(cursor.getString(cursor.getColumnIndex(COLUMN_BILL_ID)));
-                    bill.setDate(simpleDateFormat.parse(cursor.getString(cursor.getColumnIndex(COLUMN_BILL_DATE))));
+                    bill.setDate(cursor.getLong(cursor.getColumnIndex(COLUMN_BILL_DATE)));
 
                     billList.add(bill);
                 } while (cursor.moveToNext());
@@ -73,9 +78,10 @@ public class BillDAO implements Constant {
                     COLUMN_BILL_DATE + "=?",
                     new String[]{String.valueOf(date)},
                     null, null, null);
+            Log.e("DATE: ", String.valueOf(date));
             if (cursor.moveToFirst()) {
                 do {
-                    billList.add(new Bill(cursor.getString(0), simpleDateFormat.parse(cursor.getString(1))));
+                    billList.add(new Bill(cursor.getString(0), cursor.getLong(1)));
                 } while (cursor.moveToNext());
             }
             return billList;
@@ -99,7 +105,7 @@ public class BillDAO implements Constant {
             if (cursor != null && cursor.moveToFirst()) {
                 bill = new Bill();
                 bill.setBillId(cursor.getString(cursor.getColumnIndex(COLUMN_BILL_ID)));
-                bill.setDate(simpleDateFormat.parse(cursor.getString(cursor.getColumnIndex(COLUMN_BILL_DATE))));
+                bill.setDate(cursor.getLong(cursor.getColumnIndex(COLUMN_BILL_DATE)));
             }
             return bill;
         } catch (Exception e) {
@@ -112,7 +118,7 @@ public class BillDAO implements Constant {
         SQLiteDatabase sqLiteDatabase = databaseManager.getWritableDatabase();
 
         ContentValues values = new ContentValues();
-        values.put(COLUMN_BILL_DATE, bill.getDate().toString());
+        values.put(COLUMN_BILL_DATE, String.valueOf(bill.getDate()));
 
         return sqLiteDatabase.update(TABLE_BILL, values, COLUMN_BILL_ID + " =?", new String[]{bill.getBillId()});
 
@@ -124,4 +130,45 @@ public class BillDAO implements Constant {
 
         return sqLiteDatabase.delete(TABLE_BILL, COLUMN_BILL_ID + "=?", new String[]{billID});
     }
+
+    public static int formatBillDateMonth(long billDate) {
+        SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy");
+        //lấy list bill theo tháng
+        try {
+            // chuyển long ->dạng string
+            String dateString = sdf.format(new Date(billDate)).toString();
+            //chuyển String ->date
+            Date date = sdf.parse(dateString);
+            int month = date.getMonth() + 1;
+            Log.e("Month: ", String.valueOf(month));
+            return month;
+        } catch (Exception e) {
+            Log.e("Month error : ", String.valueOf(e));
+            return 0;
+        }
+    }
+
+    public List<Bill> getListBillByMonth(String day,String month) {
+        SQLiteDatabase sqLiteDatabase = databaseManager.getWritableDatabase();
+        List<Bill> billList = new ArrayList<>();
+        String sql = "SELECT * FROM " + TABLE_BILL + " WHERE strftime('%m',Bill.ngaymua/1000,'unixepoch') ='" + month + "'" +
+                " AND strftime('%d',Bill.ngaymua/1000,'unixepoch') ='" + day+"'";
+
+        //String sql = "SELECT * FROM " + TABLE_BILL + " WHERE strftime('%d-%m',Bill.ngaymua/1000,'unixepoch') ='" + day + "'-'"+month+"'" ;
+        Cursor cursor = sqLiteDatabase.rawQuery(sql, null);
+        Log.e("select bill: ", sql);
+        if (cursor.moveToFirst()) {
+            do {
+                Bill bill = new Bill();
+                bill.setBillId(cursor.getString(0));
+                bill.setDate(cursor.getLong(1));
+
+                billList.add(bill);
+            } while (cursor.moveToNext());
+
+        }
+        return billList;
+    }
+
+
 }

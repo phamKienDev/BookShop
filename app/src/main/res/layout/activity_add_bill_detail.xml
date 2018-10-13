@@ -35,16 +35,28 @@
             android:imeOptions="actionNext"
             android:inputType="text" />
 
-        <EditText
-            android:id="@+id/edtBookID"
-            style="@style/TextHintInButton"
+
+
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="45dp"
-            android:layout_marginTop="10dp"
-            android:background="@drawable/customer_button2"
-            android:hint="BookID"
-            android:imeOptions="actionNext"
-            android:inputType="text" />
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="10dp">
+            <TextView
+                style="@style/TextHintInButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginRight="10dp"
+                android:text="@string/title_activity_book_activity"
+                android:textSize="16sp" />
+
+            <Spinner
+                android:id="@+id/spinnerBookID"
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:background="@drawable/customer_button2" />
+        </LinearLayout>
 
         <EditText
             android:id="@+id/edtQuantityBuy"

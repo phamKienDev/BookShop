@@ -69,7 +69,7 @@ public interface Constant {
 
     String CREATE_TABLE_BILL="CREATE TABLE "+ TABLE_BILL+" ( "+
             COLUMN_BILL_ID+" CHAR(7) PRIMARY KEY NOT NULL,"+
-            COLUMN_BILL_DATE+ " DATE NOT NULL"+
+            COLUMN_BILL_DATE+ " LONG NOT NULL"+
             " ) ";
 
     //BILL DETAIL

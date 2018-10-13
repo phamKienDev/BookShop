@@ -55,10 +55,8 @@ public class BillActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayShowHomeEnabled(true);
 
         //insert
-        SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
-        Date time = new Date();
-//        billDAO.insertBill(new Bill("bill01", time));
-//        billDAO.insertBill(new Bill("bill02", time));
+
+        //billDAO.insertBill(new Bill("bill02", time));
 
         getListBill();
 
@@ -81,8 +79,7 @@ public class BillActivity extends AppCompatActivity {
         RecyclerView.LayoutManager manager = new LinearLayoutManager(this);
         recycleviewBill.setLayoutManager(manager);
         recycleviewBill.setAdapter(billAdapter);
-        Toast.makeText(this, ""+billList.get(0).getDate(), Toast.LENGTH_LONG).show();
-        Log.e("123","123"+billList.get(0).getDate());
+        //Log.e("getListBill","getListBill"+billList.get(1).getDate());
     }
 
 

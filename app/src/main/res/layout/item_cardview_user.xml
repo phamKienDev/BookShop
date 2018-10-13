@@ -32,7 +32,6 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="Gotham Rounded"
-                android:text="User 01"
                 android:textColor="#19769F"
                 android:textSize="15sp" />
 
@@ -41,7 +40,6 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="Gotham Rounded"
-                android:text="01223456789"
                 android:textColor="#95989A"
                 android:textSize="13sp" />
 
@@ -50,7 +48,6 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="Gotham Rounded"
-                android:text="Address "
                 android:textColor="#95989A"
                 android:textSize="12sp" />
         </LinearLayout>

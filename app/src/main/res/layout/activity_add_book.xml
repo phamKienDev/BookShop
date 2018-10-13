@@ -4,8 +4,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".AddBookActivity"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    tools:context=".AddBookActivity">
+
     <android.support.v7.widget.Toolbar
         android:id="@+id/toolbarAddBook"
         android:layout_width="match_parent"
@@ -32,25 +33,27 @@
             android:text="@string/action_add_book"
             android:textColor="#19769F"
             android:textSize="34dp" />
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal">
+
             <TextView
+                style="@style/TextHintInButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/title_activity_typebook_activity"
-                style="@style/TextHintInButton"
-                android:textSize="16sp"
                 android:layout_gravity="center_vertical"
-                android:layout_marginRight="10dp"/>
+                android:layout_marginRight="10dp"
+                android:text="@string/title_activity_typebook_activity"
+                android:textSize="16sp" />
+
             <Spinner
                 android:id="@+id/spinnerTypeBook"
                 android:layout_width="match_parent"
                 android:layout_height="45dp"
-                android:layout_marginTop="10dp"
-                android:background="@drawable/customer_button2"
-                />
+                style="@style/TextHintInButton"
+                android:background="@drawable/customer_button2" />
         </LinearLayout>
 
 
@@ -62,8 +65,8 @@
             android:layout_marginTop="10dp"
             android:background="@drawable/customer_button2"
             android:hint="ID book"
-            android:inputType="text"
-            android:imeOptions="actionNext"/>
+            android:imeOptions="actionNext"
+            android:inputType="text" />
 
         <EditText
             android:id="@+id/edtAuthur"
@@ -73,8 +76,8 @@
             android:layout_marginTop="10dp"
             android:background="@drawable/customer_button2"
             android:hint="Authur"
-            android:inputType="text"
-            android:imeOptions="actionNext"/>
+            android:imeOptions="actionNext"
+            android:inputType="text" />
 
         <EditText
             android:id="@+id/edtBookNxb"
@@ -84,7 +87,7 @@
             android:layout_marginTop="10dp"
             android:background="@drawable/customer_button2"
             android:hint="NXB"
-            android:imeOptions="actionNext"/>
+            android:imeOptions="actionNext" />
 
 
         <EditText
@@ -95,8 +98,8 @@
             android:layout_marginTop="10dp"
             android:background="@drawable/customer_button2"
             android:hint="Price"
-            android:inputType="text"
-            android:imeOptions="actionNext"/>
+            android:imeOptions="actionNext"
+            android:inputType="text" />
 
         <EditText
             android:id="@+id/edtQuantity"
@@ -106,9 +109,8 @@
             android:layout_marginTop="10dp"
             android:background="@drawable/customer_button2"
             android:hint="Quantity"
-            android:inputType="number"
-            android:imeOptions="actionDone"/>
-
+            android:imeOptions="actionDone"
+            android:inputType="number" />
 
 
         <LinearLayout
@@ -140,8 +142,8 @@
                 android:layout_marginTop="20dp"
                 android:layout_weight="1"
                 android:background="@drawable/customer_button"
-                android:text="Add book"
                 android:onClick="addBook"
+                android:text="Add book"
                 android:textSize="18sp"
                 android:textStyle="bold" />
         </LinearLayout>
@@ -153,8 +155,8 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
             android:background="@drawable/customer_button"
-            android:text="View the book list"
             android:onClick="viewTheBookList"
+            android:text="View the book list"
             android:textSize="18sp"
             android:textStyle="bold" />
     </LinearLayout>

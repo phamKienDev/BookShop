@@ -35,6 +35,8 @@ public class BookActivity extends AppCompatActivity {
         manager=new DatabaseManager(this);
         bookDAO = new BookDAO(manager);
         bookList = new ArrayList<>();
+        Book book=new Book();
+
 
         // bookDAO.insertBook(new Book("sa2","01","kien","kima",70000,10));
         //bookDAO.insertBook(new Book("sa3","02","kien","kima",70000,10));
